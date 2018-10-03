@@ -2,6 +2,7 @@
 /* implementation of functions related to operations with the weather_info structure */
 #include "../include/weather_info.h"
 
+#define MAX_BUFFER 1024
 #define C_TO_F 9/5 + 32
 
 weather_info * hash = NULL;
@@ -58,4 +59,34 @@ void print_weather_info(weather_info * wi) {
     printf("Nubosidad: %d \n", wi->m_nub);
 
     printf("\n---------------------------------------------\n\n");
+}
+
+int weather_info_to_json(char *buffer, int buflen, weather_info * wi) {
+    int err;
+
+    // adds name of object to buffer
+    char *object_name = "weather_info:\n";
+    strcpy(buffer, object_name);
+
+    // converts date to string
+    const char *src = ctime(&wi->m_date);
+    char *cstring = (char* ) malloc (sizeof(char) * (strlen(src)-1));
+    strncpy(cstring, src, strlen(src)-1);
+
+    // opens buffer for writting json
+    jwOpen(buffer + strlen(object_name), buflen - strlen(object_name), JW_OBJECT, JW_PRETTY);
+
+    // writes pairs of key, value for json objects
+    jwObj_string("ciudad", wi->m_city);
+    jwObj_string("fecha", cstring);
+    jwObj_double("tmin", wi->m_min);
+    jwObj_double("tmax", wi->m_max);
+    jwObj_int("prec", wi->m_prec);
+    jwObj_int("nub", wi->m_nub);
+
+    err = jwClose();
+
+    sprintf(buffer, "%s\n", buffer);
+
+    return err;
 }
