@@ -6,6 +6,7 @@
 #include <time.h>
 #include "uthash.h"
 #include "jWrite.h"
+#include "str_util.h"
 
 typedef struct weather_info_struct weather_info;
 

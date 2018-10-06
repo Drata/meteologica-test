@@ -47,6 +47,10 @@ void add_weather(weather_info *wi) {
     // allocates memory for key string
     char *dest = (char*) malloc ((strlen(city) + strlen(date)) * sizeof(char));
 
+    // cleans strings
+    remove_accents(city, city);
+    to_lower_case(city, city);
+
     // concatenates city and date to create the hash key
     sprintf(dest, "%s%s", city, date);
 
@@ -74,7 +78,7 @@ int weather_info_to_json(char *buffer, int buflen, int fahrenheit, weather_info 
     // converts temperature if necessary
     if(fahrenheit == 1) {
         max = wi->m_max * C_TO_F;
-        min = wi->m_min* C_TO_F;
+        min = wi->m_min * C_TO_F;
     } else {
         max = wi->m_max;
         min = wi->m_min;
