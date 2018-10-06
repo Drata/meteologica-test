@@ -9,7 +9,7 @@ CFLAGS_GUI += -std=c99 -g -pedantic -O2
 GLFW3 := $(shell pkg-config --libs glfw3)
 LIBS = $(GLFW3) -lGL -lm -lGLU -lGLEW
 
-
+# Create
 meteologica: meteologica_console meteologica_gui clean
 
 meteologica_gui: main_gui.o weather_info.o jWrite.o csvparser.o str_util.o
