@@ -1,5 +1,5 @@
 # meteologica-test
-Este programa muestra por pantalla la información del clima de una ciudad y un 
+Este programa muestra por pantalla la información del clima de una ciudad en una fecha determinada.
 
 Instrucciones:
 
