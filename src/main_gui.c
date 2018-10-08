@@ -39,6 +39,15 @@
 static void error_callback(int e, const char *d)
 {printf("Error %d: %s\n", e, d);}
 
+/*
+ * Function: load_data
+ * --------------------
+ *  Reads information of a csv file and loads it to cache
+ *
+ *  file: path of the file to load
+ *
+ *  return: code error, 0 if all went good
+ */
 int load_data(char * file) {
     CsvParser *csvparser = CsvParser_new(file, ";", 1);
     CsvRow *row;
